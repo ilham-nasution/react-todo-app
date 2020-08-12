@@ -6,11 +6,13 @@ const CreateTodo = ({ handleSubmit, handleInput, values }) => {
       className="bg-custom-2 p-3 rounded mb-3 shadow"
       onSubmit={handleSubmit}
     >
-      <h3>
+      <h3 className="mb-1">
         <strong>Create Task</strong>
       </h3>
       <div className="form-group">
-        <label htmlFor="title">Title</label>
+        <label className="m-0" htmlFor="title">
+          Title
+        </label>
         <input
           onChange={handleInput}
           value={values.title}
@@ -20,7 +22,9 @@ const CreateTodo = ({ handleSubmit, handleInput, values }) => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="details">Details</label>
+        <label className="m-0" htmlFor="details">
+          Details
+        </label>
         <textarea
           onChange={handleInput}
           value={values.details}
