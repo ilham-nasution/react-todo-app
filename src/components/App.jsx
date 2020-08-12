@@ -12,7 +12,6 @@ const App = () => {
   const [values, setValues] = useState(initialState);
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [render, setRender] = useState(false);
 
   useEffect(() => {
     console.log("fetch api");
@@ -24,7 +23,7 @@ const App = () => {
       setLoading(false);
     };
     fetchData();
-  }, [render]);
+  }, []);
 
   const handleInput = (event) => {
     event.persist();
@@ -39,8 +38,7 @@ const App = () => {
     Axios.post("https://glacial-taiga-73174.herokuapp.com/tasks", {
       task: values,
     }).then((res) => {
-      console.log(res);
-      setRender(!render);
+      setTodoList((prevItems) => [...prevItems, res.data]);
     });
     setValues(initialState);
   };
@@ -49,16 +47,22 @@ const App = () => {
     Axios.patch(`https://glacial-taiga-73174.herokuapp.com/tasks/${id}`, {
       task: { completed: true },
     }).then((res) => {
-      console.log(res);
-      setRender(!render);
+      const newTodoList = todoList.map((item) => {
+        if (item.id === res.data.id) {
+          item.completed = true;
+        }
+        return item;
+      });
+      setTodoList(newTodoList);
     });
   };
 
   const handleDelete = (id) => {
     Axios.delete(`https://glacial-taiga-73174.herokuapp.com/tasks/${id}`).then(
-      (res) => {
-        console.log(res);
-        setRender(!render);
+      () => {
+        const deletedId = id;
+        const newTodoList = todoList.filter((item) => item.id !== deletedId);
+        setTodoList(newTodoList);
       }
     );
   };
