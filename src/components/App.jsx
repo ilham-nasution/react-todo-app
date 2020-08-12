@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import CreateTodo from "./CreateTodo";
 import Axios from "axios";
+import "./App.css";
 
 const initialState = {
   title: "",
@@ -69,16 +70,17 @@ const App = () => {
 
   return (
     <div className="container">
+      <h1 className="mb-5 text-white">Task Manager</h1>
+      <CreateTodo
+        values={values}
+        handleInput={handleInput}
+        handleSubmit={handleSubmit}
+      />
       <TodoList
         todoList={todoList}
         loading={loading}
         handleDelete={handleDelete}
         handleDone={handleDone}
-      />
-      <CreateTodo
-        values={values}
-        handleInput={handleInput}
-        handleSubmit={handleSubmit}
       />
     </div>
   );

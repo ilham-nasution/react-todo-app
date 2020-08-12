@@ -1,0 +1,25 @@
+body {
+  background-color: #204051;
+}
+
+.text-custom {
+  color: #204051;
+}
+
+.bg-custom {
+  background-color: #e7dfd5;
+}
+
+.bg-custom-2 {
+  background-color: #84a9ac;
+}
+
+.btn-custom {
+  background-color: #204051;
+  color: whitesmoke;
+}
+
+.btn-custom-2 {
+  background-color: #3b6978;
+  color: whitesmoke;
+}

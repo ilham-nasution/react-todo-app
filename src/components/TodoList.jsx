@@ -4,7 +4,6 @@ import Todo from "./Todo";
 const TodoList = ({ loading, todoList, handleDelete, handleDone }) => {
   return (
     <>
-      <h1 className="mb-5">Todo List</h1>
       {loading && (
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">

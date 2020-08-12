@@ -2,7 +2,13 @@ import React from "react";
 
 const CreateTodo = ({ handleSubmit, handleInput, values }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      className="bg-custom-2 p-3 rounded mb-3 shadow"
+      onSubmit={handleSubmit}
+    >
+      <h3>
+        <strong>Create Task</strong>
+      </h3>
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input
@@ -15,7 +21,7 @@ const CreateTodo = ({ handleSubmit, handleInput, values }) => {
       </div>
       <div className="form-group">
         <label htmlFor="details">Details</label>
-        <input
+        <textarea
           onChange={handleInput}
           value={values.details}
           name="details"
@@ -23,7 +29,7 @@ const CreateTodo = ({ handleSubmit, handleInput, values }) => {
           className="form-control"
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-custom">
         Submit
       </button>
     </form>
