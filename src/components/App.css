@@ -23,3 +23,18 @@ body {
   background-color: #3b6978;
   color: whitesmoke;
 }
+
+.item-enter {
+  transform: translate(-1000px, 0px);
+}
+.item-enter-active {
+  transform: translate(0px, 0px);
+  transition: all 1s;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 700ms ease-in;
+}
