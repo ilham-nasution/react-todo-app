@@ -3,6 +3,7 @@ import TodoList from "./TodoList";
 import CreateTodo from "./CreateTodo";
 import Axios from "axios";
 import "./App.css";
+import AuthForm from "./AuthForm";
 
 const initialState = {
   title: "",
@@ -71,7 +72,8 @@ const App = () => {
   return (
     <div className="container">
       <h1 className="mb-3 text-white">Task Manager</h1>
-      <CreateTodo
+      <AuthForm />
+      {/* <CreateTodo
         values={values}
         handleInput={handleInput}
         handleSubmit={handleSubmit}
@@ -81,7 +83,7 @@ const App = () => {
         loading={loading}
         handleDelete={handleDelete}
         handleDone={handleDone}
-      />
+      /> */}
     </div>
   );
 };
