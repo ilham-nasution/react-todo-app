@@ -14,9 +14,8 @@ const TodoList = ({ loading, todoList, handleDelete, handleDone }) => {
       )}
       <TransitionGroup>
         {todoList.map((todo) => (
-          <CSSTransition timeout={1000} classNames="item">
+          <CSSTransition key={todo.id} timeout={1000} classNames="item">
             <Todo
-              key={todo.id}
               todo={todo}
               handleDone={handleDone}
               handleDelete={handleDelete}

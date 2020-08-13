@@ -1,40 +1,16 @@
-import React, { useState } from "react";
-import Axios from "axios";
+import React from "react";
 
-const initialState = {
-  email: "",
-  password: "",
-};
-const AuthForm = () => {
-  const [values, setValues] = useState(initialState);
-  const [haveAcc, setHaveAcc] = useState(true);
-
-  const handleInput = (event) => {
-    event.persist();
-    setValues((prevValues) => ({
-      ...prevValues,
-      [event.target.name]: event.target.value,
-    }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    Axios.post(
-      `http://localhost:3001/${haveAcc ? "sessions" : "registrations"}`,
-      {
-        user: values,
-      }
-    )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
-  const handleAuthForm = () => {
-    setHaveAcc(!haveAcc);
-  };
-
+const AuthForm = ({
+  handleAuthSubmit,
+  haveAcc,
+  handleAuthForm,
+  handleAuthInput,
+  authValues,
+  error,
+}) => {
   return (
     <div className="bg-custom p-2 rounded">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAuthSubmit}>
         <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
@@ -42,8 +18,8 @@ const AuthForm = () => {
             type="email"
             className="form-control"
             name="email"
-            value={values.email}
-            onChange={handleInput}
+            value={authValues.email}
+            onChange={handleAuthInput}
             aria-describedby="emailHelp"
           />
         </div>
@@ -51,12 +27,13 @@ const AuthForm = () => {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            value={values.password}
+            value={authValues.password}
             className="form-control"
             name="password"
-            onChange={handleInput}
+            onChange={handleAuthInput}
           />
         </div>
+        {error && <p className="text-danger">{error}</p>}
 
         <button type="submit" className="btn btn-custom">
           Submit

@@ -10,22 +10,45 @@ const initialState = {
   details: "",
 };
 
+const initialAuthState = {
+  email: "",
+  password: "",
+};
+
 const App = () => {
   const [values, setValues] = useState(initialState);
+  const [authValues, setAuthValues] = useState(initialAuthState);
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [haveAcc, setHaveAcc] = useState(true);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    console.log("fetch api");
+    Axios.get("https://glacial-taiga-73174.herokuapp.com/logged_in", {
+      withCredentials: true,
+    }).then((res) => {
+      if (res.data.logged_in) {
+        setLoggedIn(true);
+        setUser(res.data.user);
+      } else {
+        setLoggedIn(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       const result = await Axios.get(
-        "https://glacial-taiga-73174.herokuapp.com"
+        `https://glacial-taiga-73174.herokuapp.com/user/${user.id}/tasks`
       );
+      console.log(user);
       setTodoList(result.data);
       setLoading(false);
     };
-    fetchData();
-  }, []);
+    user.id && fetchData();
+  }, [user]);
 
   const handleInput = (event) => {
     event.persist();
@@ -37,11 +60,17 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post("https://glacial-taiga-73174.herokuapp.com/tasks", {
-      task: values,
-    }).then((res) => {
-      setTodoList((prevItems) => [...prevItems, res.data]);
-    });
+    Axios.post(
+      `https://glacial-taiga-73174.herokuapp.com/user/${user.id}/tasks`,
+      {
+        task: values,
+      }
+    )
+      .then((res) => {
+        console.log(res);
+        setTodoList((prevItems) => [...prevItems, res.data]);
+      })
+      .catch((err) => console.log(err));
     setValues(initialState);
   };
 
@@ -69,21 +98,89 @@ const App = () => {
     );
   };
 
+  const handleAuthSubmit = (event) => {
+    event.preventDefault();
+    setError("");
+    Axios.post(
+      `https://glacial-taiga-73174.herokuapp.com/${
+        haveAcc ? "sessions" : "registrations"
+      }`,
+      {
+        user: authValues,
+      },
+      { withCredentials: true }
+    )
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === "created") {
+          setLoggedIn(res.data.logged_in);
+          setUser(res.data.user);
+        } else {
+          setError(res.data.error);
+        }
+        setAuthValues(initialAuthState);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleAuthForm = () => {
+    setHaveAcc(!haveAcc);
+  };
+
+  const handleAuthInput = (event) => {
+    event.persist();
+    setAuthValues((prevValues) => ({
+      ...prevValues,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleLogout = () => {
+    Axios.delete("https://glacial-taiga-73174.herokuapp.com/logout", {
+      withCredentials: true,
+    })
+      .then(setLoggedIn(false))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="container">
-      <h1 className="mb-3 text-white">Task Manager</h1>
-      <AuthForm />
-      {/* <CreateTodo
-        values={values}
-        handleInput={handleInput}
-        handleSubmit={handleSubmit}
-      />
-      <TodoList
-        todoList={todoList}
-        loading={loading}
-        handleDelete={handleDelete}
-        handleDone={handleDone}
-      /> */}
+      <div className="row justify-content-between align-items-center">
+        <h1 className="mb-3 text-white">Task Manager</h1>
+        {loggedIn && (
+          <button
+            onClick={handleLogout}
+            type="button"
+            className="btn btn-outline-light"
+          >
+            Log Out
+          </button>
+        )}
+      </div>
+      {loggedIn ? (
+        <>
+          <CreateTodo
+            values={values}
+            handleInput={handleInput}
+            handleSubmit={handleSubmit}
+          />
+          <TodoList
+            todoList={todoList}
+            loading={loading}
+            handleDelete={handleDelete}
+            handleDone={handleDone}
+          />
+        </>
+      ) : (
+        <AuthForm
+          handleAuthSubmit={handleAuthSubmit}
+          haveAcc={haveAcc}
+          handleAuthForm={handleAuthForm}
+          handleAuthInput={handleAuthInput}
+          authValues={authValues}
+          error={error}
+        />
+      )}
     </div>
   );
 };
