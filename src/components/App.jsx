@@ -26,7 +26,7 @@ const App = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    Axios.get("https://glacial-taiga-73174.herokuapp.com/logged_in", {
+    Axios.get("https://limitless-headland-79091.herokuapp.com/logged_in", {
       withCredentials: true,
     }).then((res) => {
       if (res.data.logged_in) {
@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await Axios.get(
-        `https://glacial-taiga-73174.herokuapp.com/user/${user.id}/tasks`
+        `https://limitless-headland-79091.herokuapp.com/user/${user.id}/tasks`
       );
       console.log(user);
       setTodoList(result.data);
@@ -61,7 +61,7 @@ const App = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     Axios.post(
-      `https://glacial-taiga-73174.herokuapp.com/user/${user.id}/tasks`,
+      `https://limitless-headland-79091.herokuapp.com/user/${user.id}/tasks`,
       {
         task: values,
       }
@@ -75,7 +75,7 @@ const App = () => {
   };
 
   const handleDone = (id) => {
-    Axios.patch(`https://glacial-taiga-73174.herokuapp.com/tasks/${id}`, {
+    Axios.patch(`https://limitless-headland-79091.herokuapp.com/tasks/${id}`, {
       task: { completed: true },
     }).then((res) => {
       const newTodoList = todoList.map((item) => {
@@ -89,20 +89,20 @@ const App = () => {
   };
 
   const handleDelete = (id) => {
-    Axios.delete(`https://glacial-taiga-73174.herokuapp.com/tasks/${id}`).then(
-      () => {
-        const deletedId = id;
-        const newTodoList = todoList.filter((item) => item.id !== deletedId);
-        setTodoList(newTodoList);
-      }
-    );
+    Axios.delete(
+      `https://limitless-headland-79091.herokuapp.com/tasks/${id}`
+    ).then(() => {
+      const deletedId = id;
+      const newTodoList = todoList.filter((item) => item.id !== deletedId);
+      setTodoList(newTodoList);
+    });
   };
 
   const handleAuthSubmit = (event) => {
     event.preventDefault();
     setError("");
     Axios.post(
-      `https://glacial-taiga-73174.herokuapp.com/${
+      `https://limitless-headland-79091.herokuapp.com/${
         haveAcc ? "sessions" : "registrations"
       }`,
       {
@@ -136,7 +136,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    Axios.delete("https://glacial-taiga-73174.herokuapp.com/logout", {
+    Axios.delete("https://limitless-headland-79091.herokuapp.com/logout", {
       withCredentials: true,
     })
       .then(setLoggedIn(false))
