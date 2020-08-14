@@ -3,7 +3,7 @@ import React from "react";
 const CreateTodo = ({ handleSubmit, handleInput, values }) => {
   return (
     <form
-      className="bg-custom-2 p-3 rounded mb-3 shadow"
+      className="bg-custom-2 p-3 rounded shadow mb-2"
       onSubmit={handleSubmit}
     >
       <h3 className="mb-1">

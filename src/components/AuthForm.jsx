@@ -9,7 +9,7 @@ const AuthForm = ({
   error,
 }) => {
   return (
-    <div className="bg-custom p-2 rounded">
+    <div className="bg-custom p-2 rounded w-75">
       <form onSubmit={handleAuthSubmit}>
         <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
         <div className="form-group">

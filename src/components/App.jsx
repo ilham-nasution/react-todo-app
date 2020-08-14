@@ -144,44 +144,50 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-between align-items-center">
-        <h1 className="mb-3 text-white">Task Manager</h1>
-        {loggedIn && (
-          <button
-            onClick={handleLogout}
-            type="button"
-            className="btn btn-outline-light"
-          >
-            Log Out
-          </button>
+    <>
+      <div className="container-fluid">
+        <div className="row p-2 justify-content-between align-items-center">
+          <h1 className="mb-3 text-white">Task Manager</h1>
+          {loggedIn && (
+            <button
+              onClick={handleLogout}
+              type="button"
+              className="btn btn-outline-light"
+            >
+              Log Out
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="container">
+        {loggedIn ? (
+          <div className="w-100">
+            <CreateTodo
+              values={values}
+              handleInput={handleInput}
+              handleSubmit={handleSubmit}
+            />
+            <TodoList
+              todoList={todoList}
+              loading={loading}
+              handleDelete={handleDelete}
+              handleDone={handleDone}
+            />
+          </div>
+        ) : (
+          <div className="center-items">
+            <AuthForm
+              handleAuthSubmit={handleAuthSubmit}
+              haveAcc={haveAcc}
+              handleAuthForm={handleAuthForm}
+              handleAuthInput={handleAuthInput}
+              authValues={authValues}
+              error={error}
+            />
+          </div>
         )}
       </div>
-      {loggedIn ? (
-        <>
-          <CreateTodo
-            values={values}
-            handleInput={handleInput}
-            handleSubmit={handleSubmit}
-          />
-          <TodoList
-            todoList={todoList}
-            loading={loading}
-            handleDelete={handleDelete}
-            handleDone={handleDone}
-          />
-        </>
-      ) : (
-        <AuthForm
-          handleAuthSubmit={handleAuthSubmit}
-          haveAcc={haveAcc}
-          handleAuthForm={handleAuthForm}
-          handleAuthInput={handleAuthInput}
-          authValues={authValues}
-          error={error}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

@@ -38,3 +38,9 @@ body {
   opacity: 0;
   transition: opacity 700ms ease-in;
 }
+
+.center-items {
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+}
