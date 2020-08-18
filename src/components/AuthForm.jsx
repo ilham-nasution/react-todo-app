@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
-const AuthForm = ({
-  handleAuthSubmit,
-  haveAcc,
-  handleAuthForm,
-  handleAuthInput,
-  authValues,
-  error,
-}) => {
+const AuthForm = () => {
+  const [
+    ,
+    ,
+    error,
+    haveAcc,
+    authValues,
+    handleAuthSubmit,
+    handleAuthForm,
+    handleAuthInput,
+    ,
+  ] = useContext(AuthContext);
+
   return (
     <div className="bg-custom p-2 rounded w-75">
       <form onSubmit={handleAuthSubmit}>

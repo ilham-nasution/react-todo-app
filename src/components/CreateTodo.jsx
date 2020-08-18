@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "./TodoContext";
 
-const CreateTodo = ({ handleSubmit, handleInput, values }) => {
+const CreateTodo = () => {
+  const [values, , , handleInput, handleSubmit] = useContext(TodoContext);
+
   return (
     <form
       className="bg-custom-2 p-3 rounded shadow mb-2"

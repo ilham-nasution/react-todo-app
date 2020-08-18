@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Todo from "./Todo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { TodoContext } from "./TodoContext";
 
-const TodoList = ({ loading, todoList, handleDelete, handleDone }) => {
+const TodoList = () => {
+  const [, todoList, loading, , , handleDone, handleDelete] = useContext(
+    TodoContext
+  );
+
   return (
     <>
       {loading && (
