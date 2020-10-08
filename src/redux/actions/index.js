@@ -1,6 +1,14 @@
-export const signIn = () => {
+export const signInSuccess = (user) => {
   return {
-    type: "SIGN_IN",
+    type: "SIGN_IN_SUCCESS",
+    payload: user,
+  };
+};
+
+export const signInFailure = (error) => {
+  return {
+    type: "SIGN_IN_FAILURE",
+    payload: error,
   };
 };
 

@@ -1,22 +1,35 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import React from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authSignIn } from "../redux/reducers/auth";
+
+const INITIAL_STATE = {
+  email: "",
+  password: "",
+};
 
 const AuthForm = () => {
-  const [
-    ,
-    ,
-    error,
-    haveAcc,
-    authValues,
-    handleAuthSubmit,
-    handleAuthForm,
-    handleAuthInput,
-    ,
-  ] = useContext(AuthContext);
+  const [values, setValues] = useState(INITIAL_STATE);
+  const [haveAcc, setHaveAcc] = useState(true);
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.authReducer);
+
+  const handleChange = (e) => {
+    e.persist();
+    setValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(authSignIn(haveAcc, values));
+  };
 
   return (
     <div className="bg-custom p-2 rounded w-75">
-      <form onSubmit={handleAuthSubmit}>
+      <form onSubmit={handleSubmit}>
         <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
@@ -24,8 +37,8 @@ const AuthForm = () => {
             type="email"
             className="form-control"
             name="email"
-            value={authValues.email}
-            onChange={handleAuthInput}
+            value={values.email}
+            onChange={handleChange}
             aria-describedby="emailHelp"
           />
         </div>
@@ -33,10 +46,10 @@ const AuthForm = () => {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            value={authValues.password}
+            value={values.password}
             className="form-control"
             name="password"
-            onChange={handleAuthInput}
+            onChange={handleChange}
           />
         </div>
         {error && <p className="text-danger">{error}</p>}
@@ -47,7 +60,7 @@ const AuthForm = () => {
       </form>
       {haveAcc ? (
         <button
-          onClick={handleAuthForm}
+          onClick={() => setHaveAcc(false)}
           type="button"
           className="btn btn-custom mt-2"
         >
@@ -55,7 +68,7 @@ const AuthForm = () => {
         </button>
       ) : (
         <button
-          onClick={handleAuthForm}
+          onClick={() => setHaveAcc(true)}
           type="button"
           className="btn btn-custom mt-2"
         >

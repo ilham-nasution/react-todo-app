@@ -4,8 +4,9 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTodoList } from "../redux/reducers/todo";
 
-const TodoList = ({ user }) => {
+const TodoList = () => {
   const { loading, todoList } = useSelector((state) => state.todoReducer);
+  const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,11 +25,7 @@ const TodoList = ({ user }) => {
       <TransitionGroup>
         {todoList.map((todo) => (
           <CSSTransition key={todo.id} timeout={1000} classNames="item">
-            <Todo
-              todo={todo}
-              // handleDone={handleDone}
-              // handleDelete={handleDelete}
-            />
+            <Todo todo={todo} />
           </CSSTransition>
         ))}
       </TransitionGroup>

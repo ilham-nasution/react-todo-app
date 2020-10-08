@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { submitTodo } from "../redux/reducers/todo";
 
-const CreateTodo = ({ user }) => {
+const INITIAL_STATE = {
+  title: "",
+  details: "",
+};
+
+const CreateTodo = () => {
   console.log("render create");
+  const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
-  const [values, setValues] = useState({
-    title: "",
-    details: "",
-  });
+  const [values, setValues] = useState(INITIAL_STATE);
 
   const handleChange = (e) => {
     e.persist();
@@ -21,6 +24,7 @@ const CreateTodo = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(submitTodo(user.id, values));
+    setValues(INITIAL_STATE);
   };
 
   return (
@@ -55,7 +59,11 @@ const CreateTodo = ({ user }) => {
           className="form-control"
         />
       </div>
-      <button type="submit" className="btn btn-custom">
+      <button
+        type="submit"
+        className="btn btn-custom"
+        disabled={values.title === ""}
+      >
         Submit
       </button>
     </form>
