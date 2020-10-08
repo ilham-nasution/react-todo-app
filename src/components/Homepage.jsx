@@ -3,16 +3,21 @@ import TodoList from "./TodoList";
 import CreateTodo from "./CreateTodo";
 import AuthForm from "./AuthForm";
 import { AuthContext } from "./AuthContext";
+// import { useSelector, useDispatch } from "react-redux";
+// import { signIn, signOut } from "../redux/actions";
 
 const Homepage = () => {
-  const [loggedIn] = useContext(AuthContext);
+  console.log("render home");
+  const [loggedIn, user] = useContext(AuthContext);
+  // const auth = useSelector((state) => state.authReducer);
+  // const dispatch = useDispatch();
 
   return (
     <div className="container">
       {loggedIn ? (
         <div className="w-100">
-          <CreateTodo />
-          <TodoList />
+          <CreateTodo user={user} />
+          <TodoList user={user} />
         </div>
       ) : (
         <div className="center-items">

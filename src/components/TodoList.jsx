@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import Todo from "./Todo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { TodoContext } from "./TodoContext";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTodoList } from "../redux/reducers/todo";
 
-const TodoList = () => {
-  const [, todoList, loading, , , handleDone, handleDelete] = useContext(
-    TodoContext
-  );
+const TodoList = ({ user }) => {
+  const { loading, todoList } = useSelector((state) => state.todoReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodoList(user.id));
+  }, [dispatch, user.id]);
 
   return (
     <>
@@ -22,8 +26,8 @@ const TodoList = () => {
           <CSSTransition key={todo.id} timeout={1000} classNames="item">
             <Todo
               todo={todo}
-              handleDone={handleDone}
-              handleDelete={handleDelete}
+              // handleDone={handleDone}
+              // handleDelete={handleDelete}
             />
           </CSSTransition>
         ))}

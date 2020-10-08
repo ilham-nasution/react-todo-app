@@ -1,8 +1,27 @@
-import React, { useContext } from "react";
-import { TodoContext } from "./TodoContext";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { submitTodo } from "../redux/reducers/todo";
 
-const CreateTodo = () => {
-  const [values, , , handleInput, handleSubmit] = useContext(TodoContext);
+const CreateTodo = ({ user }) => {
+  console.log("render create");
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    title: "",
+    details: "",
+  });
+
+  const handleChange = (e) => {
+    e.persist();
+    setValues((prevValues) => ({
+      ...prevValues,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(submitTodo(user.id, values));
+  };
 
   return (
     <form
@@ -17,7 +36,7 @@ const CreateTodo = () => {
           Title
         </label>
         <input
-          onChange={handleInput}
+          onChange={handleChange}
           value={values.title}
           name="title"
           type="text"
@@ -29,7 +48,7 @@ const CreateTodo = () => {
           Details
         </label>
         <textarea
-          onChange={handleInput}
+          onChange={handleChange}
           value={values.details}
           name="details"
           type="text"

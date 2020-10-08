@@ -1,6 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removeTodo, doneTodo } from "../redux/reducers/todo";
 
-const Todo = ({ todo, handleDelete, handleDone }) => {
+const Todo = ({ todo }) => {
+  console.log("render todo");
+  const dispatch = useDispatch();
+
   return (
     <div className="px-4 py-2 mb-3 bg-custom rounded shadow">
       <div className="row justify-content-between align-items-center">
@@ -16,7 +21,7 @@ const Todo = ({ todo, handleDelete, handleDone }) => {
         </div>
         <div>
           <button
-            onClick={() => handleDone(todo.id)}
+            onClick={() => dispatch(doneTodo(todo.id))}
             type="button"
             className="btn btn-custom mr-3"
             disabled={todo.completed}
@@ -24,7 +29,7 @@ const Todo = ({ todo, handleDelete, handleDone }) => {
             Done
           </button>
           <button
-            onClick={() => handleDelete(todo.id)}
+            onClick={() => dispatch(removeTodo(todo.id))}
             type="button"
             className="btn btn-custom-2"
           >
