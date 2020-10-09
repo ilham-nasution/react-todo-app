@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 };
 
 const CreateTodo = () => {
-  console.log("render create");
   const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const [values, setValues] = useState(INITIAL_STATE);

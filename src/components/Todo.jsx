@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { removeTodo, doneTodo } from "../redux/reducers/todo";
 
 const Todo = ({ todo }) => {
-  console.log("render todo");
   const dispatch = useDispatch();
 
   return (
@@ -41,4 +40,4 @@ const Todo = ({ todo }) => {
   );
 };
 
-export default Todo;
+export default React.memo(Todo);

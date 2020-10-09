@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { loggedIn } from "../redux/reducers/auth";
 
 const Homepage = () => {
-  console.log("render home");
   const { isLoggedIn } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 

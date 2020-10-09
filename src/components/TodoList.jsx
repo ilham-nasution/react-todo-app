@@ -13,6 +13,12 @@ const TodoList = () => {
     dispatch(fetchTodoList(user.id));
   }, [dispatch, user.id]);
 
+  const renderTodoList = todoList.map((todo) => (
+    <CSSTransition key={todo.id} timeout={1000} classNames="item">
+      <Todo todo={todo} />
+    </CSSTransition>
+  ));
+
   return (
     <>
       {loading && (
@@ -22,13 +28,8 @@ const TodoList = () => {
           </div>
         </div>
       )}
-      <TransitionGroup>
-        {todoList.map((todo) => (
-          <CSSTransition key={todo.id} timeout={1000} classNames="item">
-            <Todo todo={todo} />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+
+      <TransitionGroup>{renderTodoList}</TransitionGroup>
     </>
   );
 };
