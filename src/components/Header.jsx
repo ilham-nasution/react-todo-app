@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authSignOut } from "../redux/reducers/auth";
+import { authSignOut } from "../store/actions";
 
 const Header = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Todo from "./Todo";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodoList } from "../redux/reducers/todo";
+import { fetchTodoList } from "../store/actions";
 
 const TodoList = () => {
   const { loading, todoList } = useSelector((state) => state.todoReducer);

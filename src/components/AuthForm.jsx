@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authSignIn } from "../redux/reducers/auth";
+import { authSignIn } from "../store/actions";
 
 const INITIAL_STATE = {
   email: "",

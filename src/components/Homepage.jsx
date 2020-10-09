@@ -3,7 +3,7 @@ import TodoList from "./TodoList";
 import CreateTodo from "./CreateTodo";
 import AuthForm from "./AuthForm";
 import { useSelector, useDispatch } from "react-redux";
-import { loggedIn } from "../redux/reducers/auth";
+import { loggedIn } from "../store/actions";
 
 const Homepage = () => {
   const { isLoggedIn } = useSelector((state) => state.authReducer);

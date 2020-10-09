@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { submitTodo } from "../redux/reducers/todo";
+import { submitTodo } from "../store/actions";
 
 const INITIAL_STATE = {
   title: "",
