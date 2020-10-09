@@ -1,26 +1,36 @@
-body {
-  background-color: #204051;
+html {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+h1 {
+  font-size: clamp(32px, 3vw, 40px);
+}
+
+h3 {
+  font-size: clamp(24px, 3vw, 32px);
 }
 
 .text-custom {
-  color: #204051;
+  color: #343a40;
 }
 
 .bg-custom {
-  background-color: #e7dfd5;
-}
-
-.bg-custom-2 {
-  background-color: #84a9ac;
+  background-color: #f8f9fa;
+  border: 1px solid #adb5bd;
 }
 
 .btn-custom {
-  background-color: #204051;
+  background-color: #588b8b;
   color: whitesmoke;
 }
 
 .btn-custom-2 {
-  background-color: #3b6978;
+  background-color: #c8553d;
+  color: whitesmoke;
+}
+
+.btn-custom-3 {
+  background-color: #f28f3b;
   color: whitesmoke;
 }
 

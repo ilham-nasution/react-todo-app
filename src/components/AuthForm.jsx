@@ -28,9 +28,11 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="bg-custom p-2 rounded w-75">
+    <div className="bg-custom p-4 rounded w-100 shadow">
       <form onSubmit={handleSubmit}>
-        <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
+        <div className="text-center">
+          <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
+        </div>
         <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
@@ -53,28 +55,31 @@ const AuthForm = () => {
           />
         </div>
         {error && <p className="text-danger">{error}</p>}
-
-        <button type="submit" className="btn btn-custom">
-          Submit
-        </button>
+        <div className="text-center">
+          <button type="submit" className="btn btn-outline-dark">
+            Submit
+          </button>
+        </div>
       </form>
-      {haveAcc ? (
-        <button
-          onClick={() => setHaveAcc(false)}
-          type="button"
-          className="btn btn-custom mt-2"
-        >
-          Don't have account? Sign Up
-        </button>
-      ) : (
-        <button
-          onClick={() => setHaveAcc(true)}
-          type="button"
-          className="btn btn-custom mt-2"
-        >
-          Already have account? Sign In
-        </button>
-      )}
+      <div className="text-center">
+        {haveAcc ? (
+          <button
+            onClick={() => setHaveAcc(false)}
+            type="button"
+            className="btn btn-link mt-2"
+          >
+            Don't have account? Sign Up
+          </button>
+        ) : (
+          <button
+            onClick={() => setHaveAcc(true)}
+            type="button"
+            className="btn btn-link mt-2"
+          >
+            Already have account? Sign In
+          </button>
+        )}
+      </div>
     </div>
   );
 };
