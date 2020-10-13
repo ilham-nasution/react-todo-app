@@ -3,35 +3,11 @@ html {
 }
 
 h1 {
-  font-size: clamp(32px, 3vw, 40px);
+  font-size: clamp(20px, 3vw, 40px);
 }
 
 h3 {
-  font-size: clamp(24px, 3vw, 32px);
-}
-
-.text-custom {
-  color: #343a40;
-}
-
-.bg-custom {
-  background-color: #f8f9fa;
-  border: 1px solid #adb5bd;
-}
-
-.btn-custom {
-  background-color: #588b8b;
-  color: whitesmoke;
-}
-
-.btn-custom-2 {
-  background-color: #c8553d;
-  color: whitesmoke;
-}
-
-.btn-custom-3 {
-  background-color: #f28f3b;
-  color: whitesmoke;
+  font-size: clamp(18px, 3vw, 32px);
 }
 
 .item-enter {

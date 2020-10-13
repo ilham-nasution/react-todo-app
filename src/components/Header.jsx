@@ -8,8 +8,8 @@ const Header = () => {
 
   return (
     <div className="container">
-      <div className="row p-2 justify-content-between align-items-center">
-        <h1 className="text-custom">Task Manager</h1>
+      <div className="d-flex justify-content-between align-items-center my-2">
+        <h1 className="text-dark"><strong>My Task Manager</strong></h1>
         {isLoggedIn && (
           <button
             onClick={() => dispatch(authSignOut())}

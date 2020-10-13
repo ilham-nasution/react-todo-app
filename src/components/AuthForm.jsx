@@ -28,9 +28,9 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="bg-custom p-4 rounded w-100 shadow">
+    <div className="bg-light p-4 rounded w-100 shadow">
       <form onSubmit={handleSubmit}>
-        <div className="text-center">
+        <div className="text-center text-dark">
           <h3>{haveAcc ? "Sign In" : "Sign Up"}</h3>
         </div>
         <div className="form-group">

@@ -27,8 +27,8 @@ const CreateTodo = () => {
   };
 
   return (
-    <form className="bg-custom p-4 rounded shadow mb-2" onSubmit={handleSubmit}>
-      <h3 className="mb-1 text-custom">
+    <form className="bg-light p-3 rounded shadow-sm mb-3" onSubmit={handleSubmit}>
+      <h3 className="mb-1 text-dark">
         <strong>Create Task</strong>
       </h3>
       <div className="form-group">
@@ -57,7 +57,7 @@ const CreateTodo = () => {
       </div>
       <button
         type="submit"
-        className="btn btn-custom-3"
+        className="btn btn-outline-primary"
         disabled={values.title === ""}
       >
         Submit
